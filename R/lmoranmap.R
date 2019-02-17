@@ -25,10 +25,10 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05){
 
   shapefile$Moran.Cat = factor(
     ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data > 0, "High - High",
-           ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0, "High - Low",
-                  ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0, "Low - High",
-                         ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0, "Low - Low",
-                                "Not Significant")))))
+    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0, "High - Low",
+    ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0, "Low - High",
+    ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0, "Low - Low",
+    "Not Significant")))))
 
   # Converting the spatial object to a data.frame
 
@@ -38,23 +38,27 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05){
 
   # Plotting the maps
 
+  # The areal data
   m1 =  ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c()+
     ggplot2::ggtitle("Data")
 
+  # Local Moran's I results for each area
   m2 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c()+
     ggplot2::ggtitle("Local Moran's I")
 
+  # The areas with resulting p-values under the specified significance
   m3 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, fill = pmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Significant p-values")
 
+  # Spdep Moran.plot categories
   m4 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
     ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"))+
@@ -62,6 +66,9 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05){
     ggplot2::coord_fixed()+
     ggplot2::ggtitle("Moran's I categories")
 
+  # Plotting and returning an object with the maps
+
   maps = gridExtra::grid.arrange(m1, m2, m3, m4, ncol = 2)
+  plot(maps)
   return(maps)
 }
