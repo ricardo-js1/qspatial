@@ -30,7 +30,7 @@ qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun 
   if(length(fun) != 2){stop("Must pick two summary functions.")}
 
   m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, title = "Point Pattern")
-  m2 = dpattern(shapefile = shapefile, sigma = sigma, palette = palette, title = "Intensity")
+  m2 = dpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, sigma = sigma, palette = palette, title = "Intensity")
 
   # First function
   if(fun[1] == "G"){m3 = gpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, nsim = nsim)}

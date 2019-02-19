@@ -4,13 +4,11 @@
 \alias{qmpattern}
 \title{Quick mapping for point pattern data}
 \usage{
-qmpattern(shapefile, data, longitude = longitude, latitude = latitude,
-  fun = c("G", "F"), sigma = NULL, nsim = 99, palette = "RdYlBu")
+qmpattern(shapefile, longitude = longitude, latitude = latitude,
+  fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu")
 }
 \arguments{
 \item{shapefile}{A shapefile of the study region.}
-
-\item{data}{A dataframe with the point pattern data.}
 
 \item{longitude}{The name of the variable containing the longitude.}
 

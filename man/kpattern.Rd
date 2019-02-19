@@ -4,7 +4,7 @@
 \alias{kpattern}
 \title{Kpattern}
 \usage{
-kpattern(shapefile, data, longitude = longitude, latitude = latitude,
+kpattern(shapefile, longitude = longitude, latitude = latitude,
   nsim = 99)
 }
 \description{

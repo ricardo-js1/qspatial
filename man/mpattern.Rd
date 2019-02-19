@@ -4,7 +4,7 @@
 \alias{mpattern}
 \title{mpattern}
 \usage{
-mpattern(shapefile, data, longitude = longitude, latitude = latitude,
+mpattern(shapefile, longitude = longitude, latitude = latitude,
   title = NULL, pcolor = "black", psize = 0.95, fill = "white")
 }
 \description{
