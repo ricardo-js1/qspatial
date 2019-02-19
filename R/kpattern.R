@@ -7,8 +7,8 @@
 #'
 
 
-kpattern = function(shapefile, data, longitude = longitude, latitude = latitude, nsim = 99){
-  pattern = spatstat::ppp(data$longitude, data$latitude, window = spatstat::as.owin(shapefile))
+kpattern = function(shapefile, longitude = longitude, latitude = latitude, nsim = 99){
+  pattern = spatstat::ppp(longitude, latitude, window = spatstat::as.owin(shapefile))
   kenv = spatstat::envelope(pattern, Kest, nsim = nsim)
   ggplot2::ggplot(data.frame(kenv), aes(x = r)) +
     gtgplot2::geom_line(aes(y = lo), col='grey') +

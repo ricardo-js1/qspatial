@@ -2,8 +2,8 @@
 #'
 #' Plots the J-Function envelope for point pattern data.
 
-jpattern = function(shapefile, data, nsim = 99){
-  pattern = spatstat::ppp(data$Longitude, data$Latitude, window = spatstat::as.owin(shapefile))
+jpattern = function(shapefile, longitude = longitude, latitude = latitude, nsim = 99){
+  pattern = spatstat::ppp(longitude, latitude, window = spatstat::as.owin(shapefile))
   jenv = spatstat::envelope(pattern, Jest, nsim = nsim)
   ggplot2::ggplot(data.frame(jenv), aes(x = r))+
     ggplot2::geom_line(aes(y = lo), col='grey') +
