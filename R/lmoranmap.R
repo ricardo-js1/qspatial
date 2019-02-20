@@ -40,7 +40,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05){
 
   # The areal data
   m1 =  ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c()+
     ggplot2::ggtitle("Data")
@@ -54,13 +54,13 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05){
 
   # The areas with resulting p-values under the specified significance
   m3 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(aes(x = long, y = lat, fill = pmoran, group = group), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = pmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Significant p-values")
 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
     ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"))+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::coord_fixed()+

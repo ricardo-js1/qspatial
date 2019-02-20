@@ -9,7 +9,7 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
 
   # Plotting the map
   ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Latitude") + ggplot2::ylab("Longitude") +
     ggplot2::scale_fill_viridis_c()+
     ggplot2::ggtitle(maptitle)
