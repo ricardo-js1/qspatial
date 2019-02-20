@@ -47,5 +47,9 @@ qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun 
   # Plotting the maps
   maps = gridExtra::grid.arrange(m1, m2, m3, m4, ncol = 2, nrow = 2)
   plot(maps)
-  return(maps)
+
+  # Returning a list with individual maps
+  maps.list = list(m1, m2, m3, m4)
+  return(maps.list)
+
 }
