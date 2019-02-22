@@ -22,7 +22,7 @@
 #'
 #'
 #' @import ggplot2
-#' @import spdep
+#' @import spatstat
 #' @export
 
 qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu"){

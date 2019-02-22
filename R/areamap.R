@@ -1,3 +1,8 @@
+#' Area map function
+#'
+#' @import ggplot2
+#' @import broom
+#' @export
 areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 

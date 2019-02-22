@@ -2,6 +2,8 @@
 #'
 #' Creates a visualization of point pattern data over a shapefile.
 #'
+#' @import ggplot2
+#' @export
 
 
 mpattern = function(shapefile,longitude = longitude, latitude = latitude,  title = NULL, pcolor = 'black', psize=.95, fill = 'white'){
