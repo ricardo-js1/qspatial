@@ -23,7 +23,7 @@ qmpattern(shapefile, longitude = longitude, latitude = latitude,
 \item{palette}{The color pallete used in the Intensity plot.}
 }
 \description{
-Quick mapping for point pattern data
+Generates the visualization and analysis of first and second order properties of point pattern data.
 }
 \details{
 The function generates a quick visualization and analysis of point pattern data with

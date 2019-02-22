@@ -1,5 +1,4 @@
 #'  Quick mapping for point pattern data
-#' @export
 #'
 #' Generates the visualization and analysis of first and second order properties of point pattern data.
 #'
