@@ -32,4 +32,8 @@ the G and F functions, they work well for larger datasets and the simulation doe
 take much time to complete. There are options included to pick two functions between
 K, G, F and J summary functions, but it's important to notice that the runtime
 of the K function is considerably bigger.
+
+
+
+teste
 }
