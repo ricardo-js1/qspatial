@@ -22,8 +22,8 @@
 #'
 #'
 #'
-
-
+#'
+#'@export
 qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu"){
   # Checking the number of chosen summary functions
   if(length(fun) != 2){stop("Must pick two summary functions.")}
