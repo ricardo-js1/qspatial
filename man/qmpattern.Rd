@@ -5,7 +5,8 @@
 \title{Quick mapping for point pattern data}
 \usage{
 qmpattern(shapefile, longitude = longitude, latitude = latitude,
-  fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu")
+  fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu",
+  psize = 0.75)
 }
 \arguments{
 \item{shapefile}{A shapefile of the study region.}

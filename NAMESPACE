@@ -3,6 +3,7 @@
 export(areamap)
 export(lmoranmap)
 export(mpattern)
+export(plotgg)
 export(qmpattern)
 import(broom)
 import(ggplot2)

@@ -1,3 +1,7 @@
+#' ggplot2 syntax generator
+#'
+#'
+#' @export
 plotgg = function(shapefile = "shapefile", variable = "adata", maptitle = NULL,
                   continuous = TRUE){
 
