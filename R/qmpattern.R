@@ -25,11 +25,11 @@
 #' @import spatstat
 #' @export
 
-qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu"){
+qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75){
   # Checking the number of chosen summary functions
   if(length(fun) != 2){stop("Must pick two summary functions.")}
 
-  m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, title = "Point Pattern")
+  m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, psize = psize, title = "Point Pattern")
   m2 = dpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, sigma = sigma, palette = palette, title = "Intensity")
 
   # First function
