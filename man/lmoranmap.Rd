@@ -4,8 +4,40 @@
 \alias{lmoranmap}
 \title{Quick visualization and analysis of areal data}
 \usage{
-lmoranmap(shapefile = shapefile, adata = data, sign = 0.05)
+lmoranmap(shapefile, adata, sign = 0.05, knearest = FALSE, k = 3)
+}
+\arguments{
+\item{shapefile}{A shapefile of the study region.}
+
+\item{adata}{A vector with the data for each area unit.}
+
+\item{sign}{The significance level for the Local Moran's I}
+
+\item{knearest}{Logical argument to create the neighborhood using the k nearest neighbors.}
+
+\item{k}{The number of neighbors used when knearest = TRUE. The default is 3.}
 }
 \description{
-Teste teste
+Creates a complete visualization and spatial autocorrelation analysis with Moran's I for areal data.
+}
+\details{
+This function utilizes ggplot2 and spdep to create a complete visualization
+and spatial autocorrelation analysis for areal data.
+
+The lenght of the areal data vector must be the same as the number of
+polygons in the shapefile. The data will be merged into it using
+the tidy function from the broom package so the maps can be created with
+ggplot2. All the steps in this transformation are made automatically by
+the function.
+
+A neighborhood must be created for the spatial analysis, the default method
+utilizes the spdep's poly2nb function which considers area units that
+share borders as neighbors. Since this can be a problem when the
+shapefile contains islands there is a option to create the neighbors with
+spdep's knearneigh function, which considers the k-nearest polygons as
+neighbors.
+
+The function returns four maps: One for the areal data, one with Local Moran's I results,
+one with Local Moran's significant p-values (where the significance can be changed via the
+sign argument) and one with the categories made with spdep's moran.plot function.
 }
