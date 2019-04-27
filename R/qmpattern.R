@@ -19,17 +19,28 @@
 #' K, G, F and J summary functions, but it's important to notice that the runtime
 #' of the K function is considerably bigger.
 #'
+#' The function will return a grid with two maps and two summary function plots: A
+#' map with the location of each registered event, an Intensity map, and two
+#' plots with the simulated envelopes of the chosen summary functions.
+#'
+#' There is some degree of customization allowed for the maps. It is possible
+#' to change the size and color of the points in the point pattern map and the
+#' palette of the Intensity map. It's also possible to change the radius used
+#' in the intensity estimate. A bigger value will find more ocurrences while
+#' estimating which in turn will result in a higher intensity for the area.
+#'
 #'
 #'
 #' @import ggplot2
 #' @import spatstat
+#' @import sf
 #' @export
 
-qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75){
+qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75, pcolor = "black"){
   # Checking the number of chosen summary functions
   if(length(fun) != 2){stop("Must pick two summary functions.")}
 
-  m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, psize = psize, title = "Point Pattern")
+  m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, psize = psize, pcolor = pcolor, title = "Point Pattern")
   m2 = dpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, sigma = sigma, palette = palette, title = "Intensity")
 
   # First function

@@ -6,7 +6,7 @@
 \usage{
 qmpattern(shapefile, longitude = longitude, latitude = latitude,
   fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu",
-  psize = 0.75)
+  psize = 0.75, pcolor = "black")
 }
 \arguments{
 \item{shapefile}{A shapefile of the study region.}
@@ -33,4 +33,14 @@ the G and F functions, they work well for larger datasets and the simulation doe
 take much time to complete. There are options included to pick two functions between
 K, G, F and J summary functions, but it's important to notice that the runtime
 of the K function is considerably bigger.
+
+The function will return a grid with two maps and two summary function plots: A
+map with the location of each registered event, an Intensity map, and two
+plots with the simulated envelopes of the chosen summary functions.
+
+There is some degree of customization allowed for the maps. It is possible
+to change the size and color of the points in the point pattern map and the
+palette of the Intensity map. It's also possible to change the radius used
+in the intensity estimate. A bigger value will find more ocurrences while
+estimating which in turn will result in a higher intensity for the area.
 }

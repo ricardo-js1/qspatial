@@ -2,10 +2,12 @@
 
 export(areamap)
 export(lmoranmap)
+export(loadqspatial)
 export(mpattern)
 export(plotgg)
 export(qmpattern)
 import(broom)
 import(ggplot2)
+import(sf)
 import(sp)
 import(spatstat)
