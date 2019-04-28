@@ -65,7 +65,8 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   lmoran = spdep::localmoran(adata, weights.matrix)
   shapefile$lmoran = lmoran[,1]
-  shapefile$pmoran = lmoran[,5] < sign
+  shapefile$pmoran = lmoran[,5] <= sign
+  shapefile$pmoran.sig = ifelse(shapefile$pmoran == "TRUE", "Significant", "Not Significant")
 
   shapefile$scaled.data = scale(adata)
   shapefile$lagged.data = spdep::lag.listw(weights.matrix, shapefile$scaled.data)
@@ -79,9 +80,15 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Converting the spatial object to a data.frame
 
+  warning.status <- getOption("warn")
+  options(warn = -1)
+  # The tidy function will make a warning each time it binds a character
+  # and a factor vector, this will silence this warnings only for this section
+  # of the code
   shapefile.df = broom::tidy(shapefile, regions = "id")
   shapefile$id = rownames(shapefile@data)
   shapefile.df = dplyr::left_join(shapefile.df, shapefile@data, by = "id")
+  options(warn = warning.status)
 
   # Plotting the maps
 
@@ -89,26 +96,27 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   m1 =  ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::scale_fill_viridis_c()+
-    ggplot2::ggtitle("Data")
+    ggplot2::scale_fill_viridis_c(name = "Frequency")+
+    ggplot2::ggtitle("Areal Data")
 
   # Local Moran's I results for each area
   m2 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::scale_fill_viridis_c()+
+    ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I")
 
-  # The areas with resulting p-values under the specified significance
+  # The areas with resulting p-values under the specified significance level
   m3 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = pmoran, group = group), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = pmoran.sig, group = group), col = "black") +
+    ggplot2::scale_fill_manual(values=c("white", "darkred"), name = "Spatial Dependence")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Significant p-values")
 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
-    ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"))+
+    ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"), name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Moran's I categories")
 
@@ -118,3 +126,4 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   plot(maps)
   return(maps)
 }
+
