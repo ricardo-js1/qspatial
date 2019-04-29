@@ -97,28 +97,33 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Frequency")+
-    ggplot2::ggtitle("Areal Data")
+    ggplot2::ggtitle("Areal Data") +
+    theme_qspatial()
+
 
   # Local Moran's I results for each area
   m2 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
-    ggplot2::ggtitle("Local Moran's I")
+    ggplot2::ggtitle("Local Moran's I") +
+    theme_qspatial()
 
   # The areas with resulting p-values under the specified significance level
   m3 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = pmoran.sig, group = group), col = "black") +
     ggplot2::scale_fill_manual(values=c("white", "darkred"), name = "Spatial Dependence")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::ggtitle("Significant p-values")
+    ggplot2::ggtitle("Significant p-values") +
+    theme_qspatial()
 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
     ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"), name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::ggtitle("Moran's I categories")
+    ggplot2::ggtitle("Moran's I categories") +
+    theme_qspatial()
 
   # Plotting and returning an object with the maps
 

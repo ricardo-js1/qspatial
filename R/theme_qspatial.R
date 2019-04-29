@@ -1,13 +1,7 @@
 #' A ggplot2 theme for qspatial!
 #'
 #'
-theme_qspatial = function(base_size = 11, base_family = "Arial",
-                          base_line_size = base_size / 170,
-                          base_rect_size = base_size / 170){
-
-  theme_minimal(base_size = base_size,
-                base_family = base_family,
-                base_line_size = base_line_size) %+replace%
+theme_qspatial = function(){
     theme(
     legend.title = element_text(size = 8, face = "italic"),
     panel.border = element_rect(fill = NA, color = "#dbdbdb", size = rel(1)),
