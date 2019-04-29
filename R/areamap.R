@@ -22,7 +22,7 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Frequency")+
     ggplot2::ggtitle(maptitle) +
-    coord_map() +
+    ggplot2::coord_map() +
     theme_qspatial()
 
 }
