@@ -11,6 +11,7 @@ mpattern = function(shapefile,longitude = longitude, latitude = latitude,  title
     ggplot2::ggplot()+
     ggplot2::geom_polygon(data = shapefile, ggplot2::aes(x = long, y = lat, group = group), col = 'black', fill = fill)+
     ggplot2::geom_point(ggplot2::aes(x = longitude, y = latitude), size= psize, col = pcolor)+
-    ggplot2::labs(title = title, x = 'Longitude', y = 'Latitude')
+    ggplot2::labs(title = title, x = 'Longitude', y = 'Latitude') +
+    theme_qspatial()
 
 }

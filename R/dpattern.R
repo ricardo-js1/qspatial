@@ -6,6 +6,7 @@ dpattern = function(shapefile, longitude, latitude, palette = "RdYlBu",  title =
     ggplot2::stat_density2d(ggplot2::aes(x = longitude, y = latitude, fill = ..level..),
                             geom = "polygon", h = sigma)+
     ggplot2::scale_fill_distiller(palette =  palette)+
-    ggplot2::labs(title = title, x = 'Longitude', y = 'Latitude')
+    ggplot2::labs(title = title, x = 'Longitude', y = 'Latitude') +
+    theme_qspatial()
 
 }
