@@ -1,7 +1,10 @@
-#' ggplot2 syntax generator
+#' ggplot2 map syntax generator
+#'
+#'
 #'
 #' @import ggplot2
 #' @export
+#'
 plotgg = function(shapefile = shapefile, adata = adata, maptitle = "Map Title",
                   continuous = TRUE, guide.title = "Guide Title"){
 
