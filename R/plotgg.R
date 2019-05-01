@@ -13,7 +13,8 @@ plotgg = function(shapefile = "shapefile", variable = "adata", maptitle = NULL,
          xlab(","Longitude) +
          ylab(Latitude) +
          scale_fill_viridis_c() +
-         ggtitle('",maptitle,"')")
+         ggtitle('",maptitle,"')
+         theme_qspatial()")
 
   } else {
 
@@ -23,7 +24,8 @@ plotgg = function(shapefile = "shapefile", variable = "adata", maptitle = NULL,
          xlab(","Longitude) +
          ylab(Latitude) +
          scale_fill_viridis_d() +
-         ggtitle('",maptitle,"')")
+         ggtitle('",maptitle,"') +
+         theme_qspatial()")
 
   }
 }

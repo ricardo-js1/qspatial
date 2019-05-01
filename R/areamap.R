@@ -4,7 +4,7 @@
 #' @import broom
 #' @export
 #'
-areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
+areamap = function(shapefile = shapefile, adata = data, maptitle = NULL, continuous = TRUE){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 
   # Joining the data and converting the spatial object to a dataframe to be compatible with ggplot2
@@ -17,7 +17,11 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
   options(warn = warning.status)
 
   # Plotting the map
-  ggplot2::ggplot(shapefile.df) +
+
+  if(continuous){
+
+
+    ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Frequency")+
@@ -25,4 +29,15 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = NULL){
     ggplot2::coord_map() +
     theme_qspatial()
 
+  } else {
+
+    ggplot2::ggplot(shapefile.df) +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+    ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
+    ggplot2::scale_fill_viridis_d(name = "Frequency")+
+    ggplot2::ggtitle(maptitle) +
+    ggplot2::coord_map() +
+    theme_qspatial()
+
+  }
 }
