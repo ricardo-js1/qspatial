@@ -17,6 +17,7 @@ kpattern = function(shapefile, longitude = longitude, latitude = latitude, nsim 
     ggplot2::geom_line(aes(y = obs)) +
     ggplot2::geom_line(aes(y = theo), col = 'red') +
     ggplot2::ggtitle("K function") +
+    ggplot2::ylab("K(r)") + ggplot2::xlab("r") +
     theme_qspatial()
 
 }

@@ -12,6 +12,7 @@ jpattern = function(shapefile, longitude = longitude, latitude = latitude, nsim 
     ggplot2::geom_line(aes(y = obs)) +
     ggplot2::geom_line(aes(y = theo), col = 'red') +
     ggplot2::ggtitle("J function") +
+    ggplot2::ylab("J(r)") + ggplot2::xlab("r") +
     theme_qspatial()
 
 }
