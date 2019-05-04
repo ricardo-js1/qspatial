@@ -2,11 +2,11 @@
 % Please edit documentation in R/plotgg.R
 \name{plotgg}
 \alias{plotgg}
-\title{ggplot2 syntax generator}
+\title{ggplot2 map syntax generator}
 \usage{
-plotgg(shapefile = "shapefile", variable = "adata", maptitle = NULL,
-  continuous = TRUE)
+plotgg(shapefile = shapefile, adata = adata, maptitle = "Map Title",
+  continuous = TRUE, guide.title = "Guide Title")
 }
 \description{
-ggplot2 syntax generator
+ggplot2 map syntax generator
 }

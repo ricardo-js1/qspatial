@@ -4,7 +4,8 @@
 \alias{areamap}
 \title{Area map function}
 \usage{
-areamap(shapefile = shapefile, adata = data, maptitle = NULL)
+areamap(shapefile = shapefile, adata = data, maptitle = "Map Title",
+  guidetitle = "Guide Title", continuous = TRUE)
 }
 \description{
 Area map function

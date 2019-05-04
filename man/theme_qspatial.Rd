@@ -4,8 +4,7 @@
 \alias{theme_qspatial}
 \title{A ggplot2 theme for qspatial!}
 \usage{
-theme_qspatial(base_size = 11, base_family = "Arial",
-  base_line_size = base_size/170, base_rect_size = base_size/170)
+theme_qspatial()
 }
 \description{
 A ggplot2 theme for qspatial!
