@@ -29,6 +29,44 @@
 #' in the intensity estimate. A bigger value will find more ocurrences while
 #' estimating which in turn will result in a higher intensity for the area.
 #'
+#' The summary functions interpretation is made the following way:
+#'
+#' For the G and the K functions, if the observed curve is above the
+#' Complete Spatial Randomness (CSR) envelope it's a suggestion of
+#' spatial clustering, if it's below it suggests a spatial regularity
+#' behavior. The spatial behavior will be complete random if the
+#' observed curve is inside the envelope.
+#'
+#' The F function behavior is inverse to the G function. If the curve
+#' is above the CSR envelope it suggests a spatial regularity behavior,
+#' if it's below it suggests spatial clustering. If it's inside the
+#' simulated envelope, it's a sign that the spatial behavior of the data
+#' is completely random.
+#'
+#' For the J function, the J(r) = 1 line marks the CSR behavior. If the
+#' observed curve is above the envelope it suggests a spatial regularity
+#' behavior, if it's below it suggests spatial clustering.
+#'
+#' By default the function always plots two of the summary functions, so
+#' the user can validate the results with both of them.
+#'
+#' @examples
+#'
+#' # Loading the example data and the included shapefile
+#'
+#' accidents.data = accidents
+#' recife = recifeshapefile
+#'
+#' # This example data contains a Recife city shapefile and the
+#' # coordinates of transit accidents that happened in the city
+#' # in 2016. TWith the shapefile and the latitude and longitude
+#' # coordinates the qmpattern can generate a visualization of
+#' # the point pattern data and check it's spatial behavior.
+#'
+#' accidents.map = qmpattern(shapefile = recife
+#' longitude = accidents.data$longitude, accidents.data$latitude,
+#' fun = c("G", "F"), sigma = 0.01, nsim = 99)
+#'
 #'
 #'
 #' @import ggplot2

@@ -16,3 +16,4 @@
 #'
 #' @examples
 #' data(dengue)
+
