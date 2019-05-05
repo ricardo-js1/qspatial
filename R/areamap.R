@@ -1,5 +1,50 @@
 #' Area map function
 #'
+#' @description
+#' Creates a choropleth map for areal data using ggplot2.
+#'
+#' @usage areamap = function(shapefile = shapefile, adata = adata,
+#' maptitle = "Map Title", guidetitle = "Guide Title", continuous = TRUE)
+#'
+#' @param shapefile A shapefile of the study region.
+#' @param adata A vector with the areal data.
+#' @param maptitle A title for the map.
+#' @param guidetitle A title for the map guide.
+#' @param continuous Logical argument indicating if the areal data is
+#' continuous or not. Discrete data is usually a variable that
+#' categorizes each region.
+#'
+#' @details This function is made to work like sp's spplot function. It
+#' creates a map for areal data but instead uses ggplot2 to do it.
+#'
+#' The function receives a shapefile from the study region and a vector
+#' containing the areal data. The data in the vector must be ordered with
+#' the same order of the polygons of the shapefile and have the same length
+#' as the shapefile's polygons.
+#'
+#' When creating a map with ggplot2 it's necessary to transform the
+#' SpatialPolygonsDataFrame object in a dataframe with broom's tidy
+#' function. This function does all the necessary transformations and
+#' returns the map.
+#'
+#' This function generates only a visualization of the spatial data.
+#' Further analysis of the spatial data can be made with the lmoranmap
+#' function.
+#'
+#' @examples
+#' # Loading the example data and the included shapefile
+#'
+#' dengue.data = dengue
+#' rio = rioshapefile
+#'
+#' #' # The example data contains dengue counts between 2009 and 2013 for
+#' # the Rio de Janeiro State. To create the map for one of these years
+#' we just need to use the areamap function.
+#'
+#' dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
+#' maptitle = "Dengue counts for Rio de Janeiro in 2010",
+#' guidetitle = "Frequency", continuous = TRUE)
+#'
 #' @import ggplot2
 #' @import broom
 #' @export
