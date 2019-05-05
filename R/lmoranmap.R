@@ -31,6 +31,39 @@
 #' one with Local Moran's significant p-values (where the significance can be changed via the
 #' sign argument) and one with the categories made with spdep's moran.plot function.
 #'
+#' @examples
+#'
+#' # Loading the example data and the included shapefile
+#'
+#' dengue.data = dengue
+#' rio = rioshapefile
+#'
+#' # The example data contains dengue counts between 2009 and 2013 for
+#' # the Rio de Janeiro State. We can run the spatial analysis for each
+#' # of these years.
+#'
+#' dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$x2010)
+#'
+#' # This will generate a grid containing a cloropleth map for the
+#' # dengue counts, a map with the results from Local Moran's I, a
+#' # map indicating which regions had significant results on the
+#' # Local Moran's I and a map with the categories utilized on
+#' # spdep's moran.plot function.
+#'
+#' # The significance level used here can be changed via the sign
+#' # parameter on the function.
+#'
+#' # The neighborhood for the areal data is created by spdep's
+#' # poly2nb function by default. Since this kind of neighborhood
+#' # can be problematic for regions that are not contiguous as a
+#' # whole it's also possible to create the neighborhood via the
+#' # knearneigh function.
+#'
+#' dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$x2010, knearneigh = TRUE, k = 3)
+#'
+#' # By default it counts the 3 nearest polygons as neighbors, but
+#' # this can be easily changed via the k parameter on the function.
+#'
 #' @export
 #' @import sp
 
@@ -56,7 +89,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
     coords = sp::coordinates(shapefile)
     ids = row.names(as(shapefile, "data.frame"))
-    shapefile.nb = spdep::knn2nb(knearneigh(coords, k = k), row.names = ids)
+    shapefile.nb = spdep::knn2nb(spdep::knearneigh(coords, k = k), row.names = ids)
     weights.matrix = spdep::nb2listw(shapefile.nb)
 
   }
