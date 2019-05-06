@@ -52,7 +52,7 @@ rio = rioshapefile
 # the Rio de Janeiro State. We can run the spatial analysis for each
 # of these years.
 
-dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$x2010)
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 
 # This will generate a grid containing a cloropleth map for the
 # dengue counts, a map with the results from Local Moran's I, a
@@ -69,7 +69,7 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$x2010)
 # whole it's also possible to create the neighborhood via the
 # knearneigh function.
 
-dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$x2010, knearneigh = TRUE, k = 3)
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearneigh = TRUE, k = 3)
 
 # By default it counts the 3 nearest polygons as neighbors, but
 # this can be easily changed via the k parameter on the function.

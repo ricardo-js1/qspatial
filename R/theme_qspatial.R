@@ -2,17 +2,17 @@
 #'
 #'
 theme_qspatial = function(){
-    theme(
-    legend.title = element_text(size = 8, face = "italic"),
-    panel.border = element_rect(fill = NA, color = "#dbdbdb", size = rel(1)),
-    panel.grid = element_line(colour = "#dbdbdb", linetype = 2),
-    panel.background  = element_blank(),
-    plot.background = element_rect(fill = "#ffffff", color = NA),
-    legend.background = element_rect(fill = "transparent", color = NA),
-    legend.key = element_rect(fill = "transparent", color = NA),
-    axis.text = element_text(size = 8, face = "italic"),
-    axis.title = element_text(size = 10),
-    plot.title = element_text(size = 12),
-    legend.text = element_text(size = 8)
+    ggplot2::theme(
+    legend.title = ggplot2::element_text(size = 8, face = "italic"),
+    panel.border = ggplot2::element_rect(fill = NA, color = "#dbdbdb", size = rel(1)),
+    panel.grid = ggplot2::element_line(colour = "#dbdbdb", linetype = 2),
+    panel.background  = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(fill = "#ffffff", color = NA),
+    legend.background = ggplot2::element_rect(fill = "transparent", color = NA),
+    legend.key = ggplot2::element_rect(fill = "transparent", color = NA),
+    axis.text = ggplot2::element_text(size = 8, face = "italic"),
+    axis.title = ggplot2::element_text(size = 10),
+    plot.title = ggplot2::element_text(size = 12),
+    legend.text = ggplot2::element_text(size = 8)
   )
 }
