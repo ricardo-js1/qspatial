@@ -10,9 +10,6 @@
 #' @param adata A vector with the areal data.
 #' @param maptitle A title for the map.
 #' @param guidetitle A title for the map guide.
-#' @param continuous Logical argument indicating if the areal data is
-#' continuous or not. Discrete data is usually a variable that
-#' categorizes each region.
 #'
 #' @details This function is made to work like sp's spplot function. It
 #' creates a map for areal data but instead uses ggplot2 to do it.
@@ -37,9 +34,9 @@
 #' dengue.data = dengue
 #' rio = rioshapefile
 #'
-#' #' # The example data contains dengue counts between 2009 and 2013 for
+#' # The example data contains dengue counts between 2009 and 2013 for
 #' # the Rio de Janeiro State. To create the map for one of these years
-#' we just need to use the areamap function.
+#' # we just need to use the areamap function.
 #'
 #' dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
 #' maptitle = "Dengue counts for Rio de Janeiro in 2010",
@@ -49,8 +46,12 @@
 #' @import broom
 #' @export
 #'
-areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", guidetitle = "Guide Title", continuous = TRUE){
+areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", guidetitle = "Guide Title", lower = NULL, upper = NULL){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
+
+  # If guide limits not specified, it uses the minimum and the maximum for discrete data
+  if(is.null(lower)){lower = min(adata)}
+  if(is.null(upper)){upper = max(adata)}
 
   # Joining the data and converting the spatial object to a dataframe to be compatible with ggplot2
   warning.status <- getOption("warn")
@@ -63,26 +64,25 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
 
   # Plotting the map
 
-  if(continuous){
-
+  if(is.numeric(adata)){
 
     ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
-    ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::scale_fill_viridis_c(name = guidetitle)+
-    ggplot2::ggtitle(maptitle) +
-    ggplot2::coord_map() +
-    theme_qspatial()
+      ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+      ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
+      ggplot2::scale_fill_viridis_c(name = guidetitle, limits = c(lower, upper))+
+      ggplot2::ggtitle(maptitle) +
+      ggplot2::coord_map() +
+      theme_qspatial()
 
   } else {
 
     ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
-    ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::scale_fill_viridis_d(name = guidetitle)+
-    ggplot2::ggtitle(maptitle) +
-    ggplot2::coord_map() +
-    theme_qspatial()
+      ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+      ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
+      ggplot2::scale_fill_viridis_d(name = guidetitle)+
+      ggplot2::ggtitle(maptitle) +
+      ggplot2::coord_map() +
+      theme_qspatial()
 
   }
 }

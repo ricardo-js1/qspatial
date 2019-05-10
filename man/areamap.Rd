@@ -15,10 +15,6 @@ maptitle = "Map Title", guidetitle = "Guide Title", continuous = TRUE)
 \item{maptitle}{A title for the map.}
 
 \item{guidetitle}{A title for the map guide.}
-
-\item{continuous}{Logical argument indicating if the areal data is
-continuous or not. Discrete data is usually a variable that
-categorizes each region.}
 }
 \description{
 Creates a choropleth map for areal data using ggplot2.
@@ -47,9 +43,9 @@ function.
 dengue.data = dengue
 rio = rioshapefile
 
-#' # The example data contains dengue counts between 2009 and 2013 for
+# The example data contains dengue counts between 2009 and 2013 for
 # the Rio de Janeiro State. To create the map for one of these years
-we just need to use the areamap function.
+# we just need to use the areamap function.
 
 dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
 maptitle = "Dengue counts for Rio de Janeiro in 2010",
