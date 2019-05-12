@@ -4,8 +4,8 @@
 \alias{areamap}
 \title{Area map function}
 \usage{
-areamap = function(shapefile = shapefile, adata = adata,
-maptitle = "Map Title", guidetitle = "Guide Title", continuous = TRUE)
+areamap(shapefile = shapefile, adata = adata,
+maptitle = "Map Title", guidetitle = "Guide Title")
 }
 \arguments{
 \item{shapefile}{A shapefile of the study region.}
@@ -49,6 +49,6 @@ rio = rioshapefile
 
 dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
 maptitle = "Dengue counts for Rio de Janeiro in 2010",
-guidetitle = "Frequency", continuous = TRUE)
+guidetitle = "Frequency")
 
 }

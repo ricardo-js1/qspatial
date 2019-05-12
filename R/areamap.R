@@ -3,8 +3,8 @@
 #' @description
 #' Creates a choropleth map for areal data using ggplot2.
 #'
-#' @usage areamap = function(shapefile = shapefile, adata = adata,
-#' maptitle = "Map Title", guidetitle = "Guide Title", continuous = TRUE)
+#' @usage areamap(shapefile = shapefile, adata = adata,
+#' maptitle = "Map Title", guidetitle = "Guide Title")
 #'
 #' @param shapefile A shapefile of the study region.
 #' @param adata A vector with the areal data.
@@ -40,7 +40,7 @@
 #'
 #' dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
 #' maptitle = "Dengue counts for Rio de Janeiro in 2010",
-#' guidetitle = "Frequency", continuous = TRUE)
+#' guidetitle = "Frequency")
 #'
 #' @import ggplot2
 #' @import broom
