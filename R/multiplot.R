@@ -31,7 +31,7 @@
 #' are not specified, the areamap function will use the minimum and maximum
 #' values found in the data, which will result in different scales for each map.
 #'
-#'
+#' @export
 
 multiplot = function(shapefile = shapefile, adata = data, maptitle = c("Map Title"), guidetitle = c("Guide Title"), lower = NULL, upper = NULL, nrow = NULL, ncol = NULL){
   n = length(adata)
