@@ -4,7 +4,7 @@
 theme_qspatial = function(){
     ggplot2::theme(
     legend.title = ggplot2::element_text(size = 8, face = "italic"),
-    panel.border = ggplot2::element_rect(fill = NA, color = "#dbdbdb", size = rel(1)),
+    panel.border = ggplot2::element_rect(fill = NA, color = "#dbdbdb", size = ggplot2::rel(1)),
     panel.grid = ggplot2::element_line(colour = "#dbdbdb", linetype = 2),
     panel.background  = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(fill = "#ffffff", color = NA),

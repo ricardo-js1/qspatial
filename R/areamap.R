@@ -47,6 +47,9 @@
 #' @export
 #'
 areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", guidetitle = "Guide Title", lower = NULL, upper = NULL){
+
+  adata = unlist(adata)
+
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 
   # If guide limits not specified, it uses the minimum and the maximum for discrete data
@@ -86,3 +89,4 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
 
   }
 }
+
