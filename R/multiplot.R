@@ -1,4 +1,4 @@
-#' Wrapper for the areamap function
+#' A Wrapper for the areamap function
 #'
 #' @description Creates multiple choropleth maps for areal data using ggplot2.
 #'

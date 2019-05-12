@@ -2,7 +2,7 @@
 % Please edit documentation in R/multiplot.R
 \name{multiplot}
 \alias{multiplot}
-\title{Wrapper for the areamap function}
+\title{A Wrapper for the areamap function}
 \usage{
 multiplot(shapefile = shapefile, adata = data, maptitle = c("Map Title"), guidetitle = c("Guide Title"), lower = NULL, upper = NULL, nrow = NULL, ncol = NULL)
 }
