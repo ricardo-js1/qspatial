@@ -82,7 +82,7 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
     ggplot2::ggplot(shapefile.df) +
       ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
       ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-      ggplot2::scale_fill_viridis_d(name = guidetitle)+
+      ggplot2::scale_fill_viridis_d(name = guidetitle, drop = FALSE)+
       ggplot2::ggtitle(maptitle) +
       ggplot2::coord_map() +
       theme_qspatial()
