@@ -74,7 +74,7 @@ recife = recifeshapefile
 
 # This example data contains a Recife city shapefile and the
 # coordinates of transit accidents that happened in the city
-# in 2016. TWith the shapefile and the latitude and longitude
+# in 2016. With the shapefile and the latitude and longitude
 # coordinates the qmpattern can generate a visualization of
 # the point pattern data and check it's spatial behavior.
 
