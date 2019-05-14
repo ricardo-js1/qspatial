@@ -54,7 +54,7 @@
 #'
 #' # Loading the example data and the included shapefile
 #'
-#' accidents.data = accidents
+#' accidents.data = acidentes
 #' recife = recifeshapefile
 #'
 #' # This example data contains a Recife city shapefile and the
@@ -63,7 +63,7 @@
 #' # coordinates the qmpattern can generate a visualization of
 #' # the point pattern data and check it's spatial behavior.
 #'
-#' accidents.map = qmpattern(shapefile = recife
+#' accidents.map = qmpattern(shapefile = recife,
 #' longitude = accidents.data$longitude, accidents.data$latitude,
 #' fun = c("G", "F"), sigma = 0.01, nsim = 99)
 #'
@@ -77,6 +77,9 @@
 qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75, pcolor = "black"){
   # Checking the number of chosen summary functions
   if(length(fun) != 2){stop("Must pick two summary functions.")}
+
+  # Loading maptools package so as.owin function works
+  if(!is.loaded('maptools')){library(maptools)}
 
   m1 = mpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, psize = psize, pcolor = pcolor, title = "Point Pattern")
   m2 = dpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, sigma = sigma, palette = palette, title = "Intensity")

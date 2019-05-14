@@ -6,7 +6,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(accidents)
+#' @usage data(acidentes)
 #'
 #' @format An object of class data.frame.
 #'
@@ -15,4 +15,4 @@
 #' @source \href{http://dados.recife.pe.gov.br/en/dataset/acidentes-de-transito-c-vitimas-2016}{Data Recife}
 #'
 #' @examples
-#' data(accidents)
+#' data(acidentes)

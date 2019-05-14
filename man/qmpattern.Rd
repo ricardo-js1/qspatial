@@ -69,7 +69,7 @@ the user can validate the results with both of them.
 
 # Loading the example data and the included shapefile
 
-accidents.data = accidents
+accidents.data = acidentes
 recife = recifeshapefile
 
 # This example data contains a Recife city shapefile and the
@@ -78,7 +78,7 @@ recife = recifeshapefile
 # coordinates the qmpattern can generate a visualization of
 # the point pattern data and check it's spatial behavior.
 
-accidents.map = qmpattern(shapefile = recife
+accidents.map = qmpattern(shapefile = recife,
 longitude = accidents.data$longitude, accidents.data$latitude,
 fun = c("G", "F"), sigma = 0.01, nsim = 99)
 
