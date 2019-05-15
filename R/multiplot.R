@@ -60,7 +60,7 @@ multiplot = function(shapefile = shapefile, adata = data, maptitle = c("Map Titl
     m2 = areamap(shapefile = shapefile, adata = adata[,2], maptitle = maptitle[2], guidetitle = guidetitle[2], lower = lower, upper = upper)
     m3 = areamap(shapefile = shapefile, adata = adata[,3], maptitle = maptitle[3], guidetitle = guidetitle[3], lower = lower, upper = upper)
     m4 = areamap(shapefile = shapefile, adata = adata[,4], maptitle = maptitle[4], guidetitle = guidetitle[4], lower = lower, upper = upper)
-    gridExtra::grid.arrange(m1, m2, m3, m4, nrow = nrow, ncol = ncol)
+    gridExtra::grid.arrange(m1, m2, m3, m4, nrow = nrow, ncol = ncol, padding = 0)
   }
 
 }
