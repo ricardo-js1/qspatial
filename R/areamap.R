@@ -52,10 +52,6 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
 
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 
-  # If guide limits not specified, it uses the minimum and the maximum for discrete data
-  if(is.null(lower)){lower = min(adata)}
-  if(is.null(upper)){upper = max(adata)}
-
   # Joining the data and converting the spatial object to a dataframe to be compatible with ggplot2
   warning.status <- getOption("warn")
   options(warn = -1)
@@ -68,6 +64,10 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
   # Plotting the map
 
   if(is.numeric(adata)){
+
+    # If guide limits are not specified, it uses the minimum and the maximum for discrete data
+    if(is.null(lower)){lower = min(adata)}
+    if(is.null(upper)){upper = max(adata)}
 
     ggplot2::ggplot(shapefile.df) +
       ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
