@@ -70,7 +70,7 @@ the user can validate the results with both of them.
 # Loading the example data and the included shapefile
 
 accidents.data = acidentes
-recife = recifeshapefile
+recife = recife
 
 # This example data contains a Recife city shapefile and the
 # coordinates of transit accidents that happened in the city
