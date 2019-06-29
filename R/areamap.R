@@ -42,6 +42,7 @@
 #' maptitle = "Dengue counts for Rio de Janeiro in 2010",
 #' guidetitle = "Frequency")
 #'
+#' @import mapproj
 #' @import ggplot2
 #' @import broom
 #' @export

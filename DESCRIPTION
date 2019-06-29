@@ -13,4 +13,6 @@ Imports:
   ggplot2,
   spdep,
   spatstat,
-  broom
+  broom,
+  mapproj
+Depends: sp, sf
