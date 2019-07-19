@@ -4,18 +4,14 @@ qspatial
 
 <!-- badges: start -->
 <!-- badges: end -->
-The goal of qspatial is to ...
+qspatial is a spatial statistics package for R which made with an user-friendly approach to allow users who are new to R or spatial statistics to visualize and analyze spatial data. The package utilizes spatstat and spdep functions to do the spatial analysis and ggplot2 to create all the resulting maps and plots.
+
+The current version of the package has functions for point pattern and areal data. The package's functions uses what is considered a common methodology found in the literature, as an example, for areal data the functions automatically creates the neighborhood and the weight's matrix.
 
 Installation
 ------------
 
-You can install the released version of qspatial from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("qspatial")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the released version of qspatial from github with:
 
 ``` r
 # install.packages("devtools")
@@ -24,31 +20,3 @@ devtools::install_github("qspatialR/qspatial")
 
 Example
 -------
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(qspatial)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
