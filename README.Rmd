@@ -15,43 +15,42 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of qspatial is to ...
+qspatial is a spatial statistics package for R which made with an user-friendly approach to allow users who are new to R or spatial statistics to visualize and analyze spatial data. The package utilizes spatstat and spdep functions to do the spatial analysis and ggplot2 to create all the resulting maps and plots.
+
+The current version of the package has functions for point pattern and areal data. The package's functions uses what is considered a common methodology found in the literature, as an example, for areal data the functions automatically creates the neighborhood and the weight's matrix.
 
 ## Installation
 
-You can install the released version of qspatial from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of qspatial from github with:
 
-``` r
-install.packages("qspatial")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
+```r
 # install.packages("devtools")
 devtools::install_github("qspatialR/qspatial")
 ```
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+### Areal Data
 
-```{r example}
+The main function for areal data is the lmoranmap function. It produces four maps: one with the counts, one with the value of the Local Moran's I result for each area unit, one showing which area units are spatially dependent under a certain significance level and one showing fhe categories of the moran.plot function from spdep.
+
+The package contains data for Dengue fever counts in the state of Rio de Janeiro for the period between 2009 and 2013. A shapefile for Rio de Janeiro is also included so the examples on the function can be tested.
+
+```{r, include = FALSE}
 library(qspatial)
-## basic example code
+dengue.data = dengue
+rio = rioshapefile
+
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+```{r, eval = FALSE}
+dengue.data = dengue
+rio = rioshapefile
 
-```{r cars}
-summary(cars)
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r, echo = FALSE, fig.align = 'center', fig.width= 12, fig.height= 7}
+plot(dengue2010)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
