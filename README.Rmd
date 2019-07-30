@@ -54,12 +54,22 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 plot(dengue2010)
 ```
 
-# Point Pattern Data
+### Point Pattern Data
 
-The main function for point pattern data is **qmpattern**. It produces four maps: 
+The main function for point pattern data is **qmpattern**. It produces four plots: A map with the ocurrences, a map for the Intensity and two plots of the summary functions. By default the function uses the G and F functions which are computationally cheaper, but the K and J functions are also available.
 
+The included data is about transit accidents in Recife, Brazil. The locations of the accidents are re
 
 ```{r, include = FALSE}
+accidents.data = acidentes
+recife = recife
+
+accidents.map = qmpattern(shapefile = recife,
+longitude = accidents.data$longitude, accidents.data$latitude,
+fun = c("G", "F"), sigma = 0.01, nsim = 5)
+```
+
+```{r, eval = FALSE}
 accidents.data = acidentes
 recife = recife
 
