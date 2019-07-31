@@ -50,7 +50,7 @@ guidetitle = "Frequency")
 
 The main function for point pattern data is **qmpattern**. It produces four plots: A map with the ocurrences, a map for the Intensity and two plots of the summary functions. By default the function uses the G and F functions which are computationally cheaper, but the K and J functions are also available.
 
-The included data is about transit accidents in Recife, Brazil. The locations of the accidents are re
+The included data is about traffic accidents in Recife, Brazil. The locations of the accidents are registered by latitude and longitude coordinates, a shapefile of the city is also included in the package.
 
 ``` r
 accidents.data = acidentes
