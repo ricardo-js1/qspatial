@@ -36,6 +36,16 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
+Since plotting maps with ggplot2 usually requires intermediary steps to transform the shapefile in a dataframe a function was built to simplify this process. The **areamap** function works in a similar way to the sp's spplot function, it receives a shapefile and a vector of data and generates the map using ggplot2.
+
+``` r
+dengue2010map = areamap(shapefile = rio, adata = dengue.data$`2010`,
+maptitle = "Dengue counts for Rio de Janeiro in 2010",
+guidetitle = "Frequency")
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+
 ### Point Pattern Data
 
 The main function for point pattern data is **qmpattern**. It produces four plots: A map with the ocurrences, a map for the Intensity and two plots of the summary functions. By default the function uses the G and F functions which are computationally cheaper, but the K and J functions are also available.
@@ -51,4 +61,4 @@ longitude = accidents.data$longitude, accidents.data$latitude,
 fun = c("G", "F"), sigma = 0.01, nsim = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
