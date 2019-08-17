@@ -101,36 +101,26 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   lmoran = spdep::localmoran(adata, weights.matrix)
   shapefile$lmoran = lmoran[,1]
-  shapefile$pmoran = lmoran[,5] <= sign
-  shapefile$pmoran.sig = ifelse(shapefile$pmoran == "TRUE", "Significant", "Not Significant")
+  shapefile$pmoran = lmoran[,5]
+  shapefile$pmoran.sig = ifelse(shapefile$pmoran <= sign, "Significant", "Not Significant")
 
   shapefile$scaled.data = scale(adata)
   shapefile$lagged.data = spdep::lag.listw(weights.matrix, shapefile$scaled.data)
 
   shapefile$Moran.Cat = factor(
-    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data > 0 & shapefile$pmoran > sign, "High - High",
-           ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0 & shapefile$pmoran > sign, "High - Low",
-                  ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0 & shapefile$pmoran > sign, "Low - High",
-                         ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0 & shapefile$pmoran > sign, "Low - Low",
+    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data > 0 & shapefile$pmoran <= sign, "High - High",
+           ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0 & shapefile$pmoran <= sign, "High - Low",
+                  ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0 & shapefile$pmoran <= sign, "Low - High",
+                         ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0 & shapefile$pmoran <= sign, "Low - Low",
                                 "Not Significant")))), levels = c("High - High", "High - Low", "Low - High", "Low - Low", "Not Significant"))
 
-  # Converting the spatial object to a data.frame
-
-  warning.status <- getOption("warn")
-  options(warn = -1)
-  # The tidy function will make a warning each time it binds a character
-  # and a factor vector, this will silence this warnings only for this section
-  # of the code
-  shapefile.df = broom::tidy(shapefile, regions = "id")
-  shapefile$id = rownames(shapefile@data)
-  shapefile.df = dplyr::left_join(shapefile.df, shapefile@data, by = "id")
-  options(warn = warning.status)
+  shapefile.sf = as(shapefile, "sf")
 
   # Plotting the maps
 
   # The areal data
-  m1 =  ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group, fill = adata), col = "black") +
+  m1 =  ggplot2::ggplot() +
+    ggplot2::geom_sf(data = shapefile.sf, aes(fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Frequency")+
     ggplot2::ggtitle("Areal Data") +
@@ -138,8 +128,8 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
 
   # Local Moran's I results for each area
-  m2 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
+  m2 = ggplot2::ggplot() +
+    ggplot2::geom_sf(data = shapefile.sf, aes(fill = shapefile$lmoran), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I") +
@@ -150,16 +140,16 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   neighborhood = as(spdep::nb2lines(shapefile.nb, coords = sp::coordinates(shapefile)), 'sf')
   neighborhood = sf::st_set_crs(neighborhood, sf::st_crs(shapefile))
 
-  m3 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group), fill = "white", col = "black") +
+  m3 = ggplot2::ggplot() +
+    ggplot2::geom_sf(data = shapefile.sf, fill = "white", col = "black") +
     ggplot2::geom_sf(data = neighborhood, col = "red") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Neighbourhood's Structure") +
     theme_qspatial()
 
   # Spdep Moran.plot categories
-  m4 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
+  m4 = ggplot2::ggplot() +
+    ggplot2::geom_sf(data = shapefile.sf, aes(fill = shapefile$Moran.Cat), col = "black") +
     ggplot2::scale_fill_manual(values = c("red","pink","light blue","blue","white"),
                                drop = F, name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
