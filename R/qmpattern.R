@@ -72,6 +72,7 @@
 #' @import ggplot2
 #' @import spatstat
 #' @import sf
+#' @import cowplot
 #' @export
 
 qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75, pcolor = "black"){
@@ -97,8 +98,7 @@ qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun 
   if(fun[2] == "J"){m4 = kpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, nsim = nsim)}
 
   # Plotting the maps
-  maps = gridExtra::grid.arrange(m1, m2, m3, m4, ncol = 2, nrow = 2)
+  maps = cowplot::plot_grid(m1, m2, m3, m4, align = "hv", axis = "tblr", nrow = 2)
   plot(maps)
-  return(maps)
 
 }
