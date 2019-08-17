@@ -144,7 +144,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Neighborhood
 
-  neighborhood = as(nb2lines(shapefile.nb, coords = sp::coordinates(shapefile)), 'sf')
+  neighborhood = as(spdep::nb2lines(shapefile.nb, coords = sp::coordinates(shapefile)), 'sf')
   neighborhood = sf::st_set_crs(neighborhood, sf::st_crs(shapefile))
 
   m3 = ggplot2::ggplot(shapefile.df) +
