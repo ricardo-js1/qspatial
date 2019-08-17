@@ -69,7 +69,7 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 # whole it's also possible to create the neighborhood via the
 # knearneigh function.
 
-dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearneigh = TRUE, k = 3)
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearest = TRUE, k = 3)
 
 # By default it counts the 3 nearest polygons as neighbors, but
 # this can be easily changed via the k parameter on the function.
