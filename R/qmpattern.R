@@ -98,7 +98,7 @@ qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun 
   if(fun[2] == "J"){m4 = kpattern(shapefile = shapefile, longitude = longitude, latitude = latitude, nsim = nsim)}
 
   # Plotting the maps
-  maps = cowplot::plot_grid(m1, m2, m3, m4, align = "hv", axis = "tblr", nrow = 2)
+  maps = cowplot::plot_grid(m1, m3, m2, m4, align = "hv", axis = "tblr", nrow = 2)
   plot(maps)
 
 }
