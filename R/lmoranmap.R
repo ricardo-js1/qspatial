@@ -59,7 +59,7 @@
 #' # whole it's also possible to create the neighborhood via the
 #' # knearneigh function.
 #'
-#' dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearneigh = TRUE, k = 3)
+#' dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearest = TRUE, k = 3)
 #'
 #' # By default it counts the 3 nearest polygons as neighbors, but
 #' # this can be easily changed via the k parameter on the function.
@@ -136,7 +136,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Local Moran's I results for each area
   m2 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = lmoran, group = group), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I") +
