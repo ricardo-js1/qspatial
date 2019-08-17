@@ -54,6 +54,27 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 plot(dengue2010)
 ```
 
+It's also possible to create the neighbourhoods using the knearneigh function from spdep, in this case the k areas with the nearest centroids will be considered as neighbours.
+
+```{r, include = FALSE}
+library(qspatial)
+dengue.data = dengue
+rio = rioshapefile
+
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearest = 5)
+```
+
+```{r, eval = FALSE}
+dengue.data = dengue
+rio = rioshapefile
+
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearest = 5)
+```
+
+```{r, echo = FALSE, fig.align = 'center', fig.width= 12, fig.height= 7}
+plot(dengue2010)
+```
+
 The **areamap** function works in a similar way to the sp's spplot function, it receives a shapefile and a vector of data and generates the map using ggplot2.
 
 ```{r, include = FALSE}

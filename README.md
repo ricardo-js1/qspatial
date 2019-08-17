@@ -36,6 +36,17 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
+It's also possible to create the neighbourhoods using the knearneigh function from spdep, in this case the k areas with the nearest centroids will be considered as neighbours.
+
+``` r
+dengue.data = dengue
+rio = rioshapefile
+
+dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`, knearest = 5)
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+
 The **areamap** function works in a similar way to the sp's spplot function, it receives a shapefile and a vector of data and generates the map using ggplot2.
 
 ``` r
@@ -44,7 +55,7 @@ maptitle = "Dengue counts for Rio de Janeiro in 2010",
 guidetitle = "Frequency")
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Point Pattern Data
 
@@ -61,4 +72,4 @@ longitude = accidents.data$longitude, accidents.data$latitude,
 fun = c("G", "F"), sigma = 0.01, nsim = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />

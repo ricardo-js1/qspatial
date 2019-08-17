@@ -3,7 +3,7 @@ dpattern = function(shapefile, longitude, latitude, palette = "RdYlBu",  title =
     shapefile.sf = as(shapefile, "sf")
 
     ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, fill = "#e5e5e5", col = "black") +
     ggplot2::stat_density2d(ggplot2::aes(x = longitude, y = latitude, fill = ..level..),
                             geom = "polygon", h = sigma)+
     ggplot2::scale_fill_distiller(palette =  palette)+

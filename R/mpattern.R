@@ -11,7 +11,7 @@ mpattern = function(shapefile,longitude = longitude, latitude = latitude,  title
     shapefile.sf = as(shapefile, "sf")
 
     ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, fill = "#e5e5e5", col = "black") +
     ggplot2::geom_point(ggplot2::aes(x = longitude, y = latitude), size= psize, col = pcolor)+
     ggplot2::labs(title = title, x = 'Longitude', y = 'Latitude') +
     theme_qspatial()

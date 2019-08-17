@@ -141,7 +141,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   neighborhood = sf::st_set_crs(neighborhood, sf::st_crs(shapefile))
 
   m3 = ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, fill = "white", col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, fill = "#e5e5e5", col = "black") +
     ggplot2::geom_sf(data = neighborhood, col = "red") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Neighbourhood's Structure") +
@@ -150,7 +150,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot() +
     ggplot2::geom_sf(data = shapefile.sf, aes(fill = shapefile$Moran.Cat), col = "black") +
-    ggplot2::scale_fill_manual(values = c("red","pink","light blue","blue","white"),
+    ggplot2::scale_fill_manual(values = c("red","pink","light blue","blue","#e5e5e5"),
                                drop = F, name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::ggtitle("Significant areas") +
