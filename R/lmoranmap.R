@@ -83,7 +83,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
     shapefile.nb = spdep::poly2nb(shapefile)
     weights.matrix = spdep::nb2listw(shapefile.nb)
 
-    } else {
+  } else {
 
     # K nearest neighbours
 
@@ -105,11 +105,11 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   shapefile$lagged.data = spdep::lag.listw(weights.matrix, shapefile$scaled.data)
 
   shapefile$Moran.Cat = factor(
-    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data > 0, "High - High",
-    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0, "High - Low",
-    ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0, "Low - High",
-    ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0, "Low - Low",
-    "Not Significant")))))
+    ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data > 0 & shapefile$pmoran > sign, "High - High",
+           ifelse(shapefile$scaled.data > 0 & shapefile$lagged.data < 0 & shapefile$pmoran > sign, "High - Low",
+                  ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data > 0 & shapefile$pmoran > sign, "Low - High",
+                         ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0 & shapefile$pmoran > sign, "Low - Low",
+                                "Not Significant")))), levels = c("High - High", "High - Low", "Low - High", "Low - Low", "Not Significant"))
 
   # Converting the spatial object to a data.frame
 
@@ -142,26 +142,30 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
     ggplot2::ggtitle("Local Moran's I") +
     theme_qspatial()
 
-  # The areas with resulting p-values under the specified significance level
+  # Neighborhood
+
+  neighborhood = as(nb2lines(shapefile.nb, coords = sp::coordinates(shapefile)), 'sf')
+  neighborhood = sf::st_set_crs(neighborhood, sf::st_crs(shapefile))
+
   m3 = ggplot2::ggplot(shapefile.df) +
-    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = pmoran.sig, group = group), col = "black") +
-    ggplot2::scale_fill_manual(values=c("white", "darkred"), name = "Spatial Dependence")+
+    ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, group = group), fill = "white", col = "black") +
+    ggplot2::geom_sf(data = neighborhood, col = "red") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::ggtitle("Significant p-values") +
+    ggplot2::ggtitle("Neighbourhood's Structure") +
     theme_qspatial()
 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot(shapefile.df) +
     ggplot2::geom_polygon(ggplot2::aes(x = long, y = lat, fill = Moran.Cat, group = group), col = "black") +
-    ggplot2::scale_fill_manual(values=c("red","pink","light blue","blue"), name = "Moran's Categories")+
+    ggplot2::scale_fill_manual(values = c("red","pink","light blue","blue","white"),
+                               drop = F, name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::ggtitle("Moran's I categories") +
+    ggplot2::ggtitle("Significant areas") +
     theme_qspatial()
 
   # Plotting and returning an object with the maps
 
-  maps = gridExtra::grid.arrange(m1, m2, m3, m4, ncol = 2)
+  maps = cowplot::plot_grid(m1, m2, m3, m4, align = "hv", axis = "tblr", nrow = 2)
   plot(maps)
-  return(maps)
-}
 
+}
