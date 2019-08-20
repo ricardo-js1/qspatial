@@ -69,6 +69,7 @@
 #' @import cowplot
 #' @import spdep
 #' @import ggplot2
+#' @import sf
 
 lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest = FALSE, k = 3){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}

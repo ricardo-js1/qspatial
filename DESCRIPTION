@@ -14,5 +14,6 @@ Imports:
   spdep,
   spatstat,
   broom,
-  mapproj
+  mapproj,
+  cowplot
 Depends: sp, sf
