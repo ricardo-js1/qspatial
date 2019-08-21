@@ -80,21 +80,30 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Creating the neighborhood and the weights matrix using spdep's functions
 
-  if(knearest == FALSE){
+  if(is.null(nb.obj) == TRUE){
 
-    # Contiguous neighbours
+    if(knearest == FALSE){
 
-    shapefile.nb = spdep::poly2nb(shapefile)
-    weights.matrix = spdep::nb2listw(shapefile.nb)
+      # Contiguous neighbours
 
-  } else {
+      shapefile.nb = spdep::poly2nb(shapefile)
+      weights.matrix = spdep::nb2listw(shapefile.nb)
 
-    # K nearest neighbours
+    } else {
 
-    coords = sp::coordinates(shapefile)
-    ids = row.names(as(shapefile, "data.frame"))
-    shapefile.nb = spdep::knn2nb(spdep::knearneigh(coords, k = k), row.names = ids)
-    weights.matrix = spdep::nb2listw(shapefile.nb)
+      # K nearest neighbours
+
+      coords = sp::coordinates(shapefile)
+      ids = row.names(as(shapefile, "data.frame"))
+      shapefile.nb = spdep::knn2nb(spdep::knearneigh(coords, k = k), row.names = ids)
+      weights.matrix = spdep::nb2listw(shapefile.nb)
+
+    } } else {
+
+      # Using a nb object chosen by the user
+
+      shapefile.nb = nb.obj
+      weights.matrix = spdep::nb2listw(shapefile.nb)
 
   }
 
@@ -121,7 +130,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # The areal data
   m1 =  ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, aes(fill = adata), col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, ggplot2::aes(fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Frequency")+
     ggplot2::ggtitle("Areal Data") +
@@ -130,7 +139,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Local Moran's I results for each area
   m2 = ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, aes(fill = shapefile$lmoran), col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, ggplot2::aes(fill = shapefile$lmoran), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I") +
@@ -150,7 +159,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Spdep Moran.plot categories
   m4 = ggplot2::ggplot() +
-    ggplot2::geom_sf(data = shapefile.sf, aes(fill = shapefile$Moran.Cat), col = "black") +
+    ggplot2::geom_sf(data = shapefile.sf, ggplot2::aes(fill = shapefile$Moran.Cat), col = "black") +
     ggplot2::scale_fill_manual(values = c("red","pink","light blue","blue","#e5e5e5"),
                                drop = F, name = "Moran's Categories")+
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
