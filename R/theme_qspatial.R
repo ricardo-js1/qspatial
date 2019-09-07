@@ -13,6 +13,7 @@ theme_qspatial = function(){
     axis.text = ggplot2::element_text(size = 8, face = "italic"),
     axis.title = ggplot2::element_text(size = 10),
     plot.title = ggplot2::element_text(size = 12),
-    legend.text = ggplot2::element_text(size = 8)
+    legend.text = ggplot2::element_text(size = 8),
+    plot.subtitle = ggplot2::element_text(size = 7)
   )
 }

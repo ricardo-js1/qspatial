@@ -71,7 +71,7 @@
 #' @import ggplot2
 #' @import sf
 
-lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest = FALSE, k = 3, nb.obj = NULL){
+lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest = FALSE, k = 3, nb.obj = NULL, maptitle = "Areal Data", guidetitle = "Title"){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 
   # Adding the data vector to the spatial object
@@ -124,6 +124,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
                          ifelse(shapefile$scaled.data < 0 & shapefile$lagged.data < 0 & shapefile$pmoran <= sign, "Low - Low",
                                 "Not Significant")))), levels = c("High - High", "High - Low", "Low - High", "Low - Low", "Not Significant"))
 
+
   shapefile.sf = as(shapefile, "sf")
 
   # Plotting the maps
@@ -132,17 +133,21 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
   m1 =  ggplot2::ggplot() +
     ggplot2::geom_sf(data = shapefile.sf, ggplot2::aes(fill = adata), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
-    ggplot2::scale_fill_viridis_c(name = "Frequency")+
-    ggplot2::ggtitle("Areal Data") +
+    ggplot2::scale_fill_viridis_c(name = guidetitle)+
+    ggplot2::ggtitle(maptitle) +
     theme_qspatial()
 
 
   # Local Moran's I results for each area
+
+  gmoran = spdep::moran.test(adata, spdep::nb2listw(shapefile.nb))
+
   m2 = ggplot2::ggplot() +
     ggplot2::geom_sf(data = shapefile.sf, ggplot2::aes(fill = shapefile$lmoran), col = "black") +
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I") +
+    ggplot2::labs(subtitle = paste("Global Moran's I:", round(as.numeric(gmoran$estimate[1]),4), sep="")) +
     theme_qspatial()
 
   # Neighborhood
