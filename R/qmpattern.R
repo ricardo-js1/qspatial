@@ -73,6 +73,7 @@
 #' @import spatstat
 #' @import sf
 #' @import cowplot
+#' @import isoband
 #' @export
 
 qmpattern = function(shapefile, longitude = longitude, latitude = latitude, fun = c("G", "F"), sigma = 0.01, nsim = 99, palette = "RdYlBu", psize = 0.75, pcolor = "black"){
