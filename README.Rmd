@@ -96,7 +96,6 @@ guidetitle = "Frequency")
 plot(dengue2010map)
 ```
 
-
 ### Point Pattern Data
 
 The main function for point pattern data is **qmpattern**. It produces four plots: A map with the ocurrences, a map for the Intensity and two plots of the summary functions. By default the function uses the G and F functions which are computationally cheaper, but the K and J functions are also available.

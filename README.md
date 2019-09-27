@@ -36,7 +36,7 @@ dengue2010 = lmoranmap(shapefile = rio, adata = dengue.data$`2010`)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
-It's also possible to create the neighbourhoods using the knearneigh function from spdep, in this case the k areas with the nearest centroids will be considered as neighbours.
+It's also possible to create the neighbourhoods using the knearneigh function from spdep, in this case the k areas with the nearest centroids will be considered as neighbors.
 
 ``` r
 dengue.data = dengue
