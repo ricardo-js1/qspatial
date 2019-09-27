@@ -15,6 +15,8 @@ maptitle = "Map Title", guidetitle = "Guide Title")
 \item{maptitle}{A title for the map.}
 
 \item{guidetitle}{A title for the map guide.}
+
+\item{border}{Logical. If FALSE, set the borders between the polygons transparent.}
 }
 \description{
 Creates a choropleth map for areal data using ggplot2.
@@ -27,11 +29,6 @@ The function receives a shapefile from the study region and a vector
 containing the areal data. The data in the vector must be ordered with
 the same order of the polygons of the shapefile and have the same length
 as the shapefile's polygons.
-
-When creating a map with ggplot2 it's necessary to transform the
-SpatialPolygonsDataFrame object in a dataframe with broom's tidy
-function. This function does all the necessary transformations and
-returns the map.
 
 This function generates only a visualization of the spatial data.
 Further analysis of the spatial data can be made with the lmoranmap
@@ -47,7 +44,7 @@ rio = rioshapefile
 # the Rio de Janeiro State. To create the map for one of these years
 # we just need to use the areamap function.
 
-dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
+dengue2010map = areamap(shapefile = rio, adata = dengue.data$`2010`,
 maptitle = "Dengue counts for Rio de Janeiro in 2010",
 guidetitle = "Frequency")
 

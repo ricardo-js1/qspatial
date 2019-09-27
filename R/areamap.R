@@ -10,6 +10,7 @@
 #' @param adata A vector with the areal data.
 #' @param maptitle A title for the map.
 #' @param guidetitle A title for the map guide.
+#' @param border Logical. If FALSE, set the borders between the polygons transparent.
 #'
 #' @details This function is made to work like sp's spplot function. It
 #' creates a map for areal data but instead uses ggplot2 to do it.
@@ -18,11 +19,6 @@
 #' containing the areal data. The data in the vector must be ordered with
 #' the same order of the polygons of the shapefile and have the same length
 #' as the shapefile's polygons.
-#'
-#' When creating a map with ggplot2 it's necessary to transform the
-#' SpatialPolygonsDataFrame object in a dataframe with broom's tidy
-#' function. This function does all the necessary transformations and
-#' returns the map.
 #'
 #' This function generates only a visualization of the spatial data.
 #' Further analysis of the spatial data can be made with the lmoranmap
@@ -38,31 +34,20 @@
 #' # the Rio de Janeiro State. To create the map for one of these years
 #' # we just need to use the areamap function.
 #'
-#' dengue2010map = areamap(shapefile = rio, adata = dengue.data$´2010´,
+#' dengue2010map = areamap(shapefile = rio, adata = dengue.data$`2010`,
 #' maptitle = "Dengue counts for Rio de Janeiro in 2010",
 #' guidetitle = "Frequency")
 #'
 #' @import mapproj
 #' @import ggplot2
-#' @import broom
 #' @export
 #'
-areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", guidetitle = "Guide Title", lower = NULL, upper = NULL){
+areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", guidetitle = "Guide Title", lower = NULL, upper = NULL, border = TRUE){
 
   adata = unlist(adata)
 
-  if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
-
-  # Joining the data and converting the spatial object to a dataframe to be compatible with ggplot2
-  #warning.status <- getOption("warn")
-  #options(warn = -1)
-  #shapefile$adata = adata
-  #shapefile.df = broom::tidy(shapefile, regions = "id")
-  #shapefile$id = rownames(shapefile@data)
-  #shapefile.df = dplyr::left_join(shapefile.df, shapefile@data, by = "id")
-  #options(warn = warning.status)
-
-  shapefile.sf = as(shapefile, "sf")
+  if(border == "TRUE"){border.col = "black"} else {border.col = "transparent"}
+  if(class(shapefile)[1] == "SpatialPolygonsDataFrame"){shapefile = as(shapefile, "sf")}
 
   # Plotting the map
 
@@ -73,7 +58,7 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
     if(is.null(upper)){upper = max(adata)}
 
     ggplot2::ggplot() +
-      ggplot2::geom_sf(data = shapefile.sf, aes(fill = adata), col = "black") +
+      ggplot2::geom_sf(data = shapefile, aes(fill = adata), col = border.col) +
       ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
       ggplot2::scale_fill_viridis_c(name = guidetitle, limits = c(lower, upper))+
       ggplot2::ggtitle(maptitle) +
@@ -82,7 +67,7 @@ areamap = function(shapefile = shapefile, adata = data, maptitle = "Map Title", 
   } else {
 
     ggplot2::ggplot() +
-      ggplot2::geom_sf(data = shapefile.sf, aes(fill = adata), col = "black") +
+      ggplot2::geom_sf(data = shapefile, aes(fill = adata), col = border.col) +
       ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
       ggplot2::scale_fill_viridis_d(name = guidetitle, drop = FALSE)+
       ggplot2::ggtitle(maptitle) +
