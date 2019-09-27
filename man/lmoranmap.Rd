@@ -16,6 +16,8 @@ lmoranmap(shapefile, adata, sign = 0.05, knearest = FALSE, k = 3)
 \item{knearest}{Logical argument to create the neighborhood using the k nearest neighbors.}
 
 \item{k}{The number of neighbors used when knearest = TRUE. The default is 3.}
+
+\item{nb.obj}{A neighborhood object.}
 }
 \description{
 Creates a complete visualization and spatial autocorrelation analysis with Moran's I for areal data.
@@ -39,7 +41,7 @@ neighbors.
 
 The function returns four maps: One for the areal data, one with Local Moran's I results,
 one with Local Moran's significant p-values (where the significance can be changed via the
-sign argument) and one with the categories made with spdep's moran.plot function.
+sign argument) and one with the neighborhood.
 }
 \examples{
 

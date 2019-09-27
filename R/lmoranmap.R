@@ -10,6 +10,7 @@
 #' @param sign The significance level for the Local Moran's I
 #' @param knearest Logical argument to create the neighborhood using the k nearest neighbors.
 #' @param k The number of neighbors used when knearest = TRUE. The default is 3.
+#' @param nb.obj A neighborhood object.
 #'
 #' @details This function utilizes ggplot2 and spdep to create a complete visualization
 #' and spatial autocorrelation analysis for areal data.
@@ -29,7 +30,7 @@
 #'
 #' The function returns four maps: One for the areal data, one with Local Moran's I results,
 #' one with Local Moran's significant p-values (where the significance can be changed via the
-#' sign argument) and one with the categories made with spdep's moran.plot function.
+#' sign argument) and one with the neighborhood.
 #'
 #' @examples
 #'
