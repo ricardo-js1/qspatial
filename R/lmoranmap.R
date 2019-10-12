@@ -136,6 +136,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = guidetitle)+
     ggplot2::ggtitle(maptitle) +
+    ggplot2::labs(subtitle = paste("\n", sep="")) +
     theme_qspatial()
 
 
@@ -148,7 +149,7 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
     ggplot2::xlab("Longitude") + ggplot2::ylab("Latitude") +
     ggplot2::scale_fill_viridis_c(name = "Moran's I")+
     ggplot2::ggtitle("Local Moran's I") +
-    ggplot2::labs(subtitle = paste("Global Moran's I:", round(as.numeric(gmoran$estimate[1]),4), sep="")) +
+    ggplot2::labs(subtitle = paste("Global Moran's I:", round(as.numeric(gmoran$estimate[1]),4),"\np-value:", round(as.numeric(gmoran$p.value), 4), sep="")) +
     theme_qspatial()
 
   # Neighborhood
