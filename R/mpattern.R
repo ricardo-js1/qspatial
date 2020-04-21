@@ -7,7 +7,7 @@
 
 
 mpattern = function(shapefile,longitude = longitude, latitude = latitude,  title = NULL, pcolor = 'black', psize=.95){
-
+    # Point pattern map
     shapefile.sf = as(shapefile, "sf")
 
     ggplot2::ggplot() +

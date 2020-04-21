@@ -5,7 +5,7 @@
 jpattern = function(shapefile, longitude = longitude, latitude = latitude, nsim = 99){
 
   # Creating the ppp object
-  pattern = spatstat::ppp(longitude, latitude, window = spatstat::as.owin(shapefile))
+  pattern = spatstat::ppp(longitude, latitude, window = as.owin2(shapefile))
   pattern = spatstat::as.ppp(pattern) # removing the events outside the specified window
   pattern = spatstat::unique.ppp(pattern) # removing duplicates
 

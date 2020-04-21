@@ -1,6 +1,7 @@
 #' A ggplot2 theme for qspatial!
 #'
 #'
+#' @export
 theme_qspatial = function(){
     ggplot2::theme(
     legend.title = ggplot2::element_text(size = 8, face = "italic"),
