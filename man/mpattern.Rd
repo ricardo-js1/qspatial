@@ -4,8 +4,14 @@
 \alias{mpattern}
 \title{mpattern}
 \usage{
-mpattern(shapefile, longitude = longitude, latitude = latitude,
-  title = NULL, pcolor = "black", psize = 0.95)
+mpattern(
+  shapefile,
+  longitude = longitude,
+  latitude = latitude,
+  title = NULL,
+  pcolor = "black",
+  psize = 0.95
+)
 }
 \description{
 Creates a visualization of point pattern data over a shapefile.

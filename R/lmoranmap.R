@@ -72,7 +72,7 @@
 #' @import ggplot2
 #' @import sf
 
-lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest = FALSE, k = 3, nb.obj = NULL, maptitle = "Areal Data", guidetitle = "Title"){
+lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest = FALSE, k = 3, nb.obj = NULL, maptitle = "Areal Data", guidetitle = "Title", as.grid = TRUE){
   if(length(shapefile) != length(adata)){stop("The length of the data vector must be the same as the number of polygons in the shapefile.")}
 
   # Adding the data vector to the spatial object
@@ -175,7 +175,13 @@ lmoranmap = function(shapefile = shapefile, adata = data, sign = 0.05, knearest 
 
   # Plotting and returning an object with the maps
 
+  if(as.grid){
   maps = cowplot::plot_grid(m1, m2, m3, m4, align = "hv", axis = "tblr", nrow = 2)
-  plot(maps)
+  plot(maps)} else{
+    plot(m1)
+    plot(m2)
+    plot(m3)
+    plot(m4)
+  }
 
 }

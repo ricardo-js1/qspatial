@@ -8,5 +8,5 @@ Description: A collection of functions to make easier to work with spatial data 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Depends: sp, sf, ggplot2, spdep, spatstat, mapproj, cowplot, maptools, isoband

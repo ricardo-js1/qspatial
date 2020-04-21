@@ -4,8 +4,7 @@
 \alias{jpattern}
 \title{Jpattern}
 \usage{
-jpattern(shapefile, longitude = longitude, latitude = latitude,
-  nsim = 99)
+jpattern(shapefile, longitude = longitude, latitude = latitude, nsim = 99)
 }
 \description{
 Plots the J-Function envelope for point pattern data.

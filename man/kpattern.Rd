@@ -4,8 +4,7 @@
 \alias{kpattern}
 \title{Kpattern}
 \usage{
-kpattern(shapefile, longitude = longitude, latitude = latitude,
-  nsim = 99)
+kpattern(shapefile, longitude = longitude, latitude = latitude, nsim = 99)
 }
 \description{
 Utilizes the Kest and Envelope functions from Spatstat and creates a visualization with

@@ -4,8 +4,13 @@
 \alias{plotgg}
 \title{ggplot2 map syntax generator}
 \usage{
-plotgg(shapefile = shapefile, adata = adata, maptitle = "Map Title",
-  continuous = TRUE, guide.title = "Guide Title")
+plotgg(
+  shapefile = shapefile,
+  adata = adata,
+  maptitle = "Map Title",
+  continuous = TRUE,
+  guide.title = "Guide Title"
+)
 }
 \description{
 ggplot2 map syntax generator
